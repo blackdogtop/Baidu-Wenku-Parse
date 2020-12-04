@@ -19,3 +19,7 @@ python3 docParser.py
 
 解析的txt文件
 ![txt-demo](https://raw.githubusercontent.com/blackdogtop/image-host/master/Baidu-Wenku-Parse/txt-demo.png)
+
+
+***TODO***
+其他类型文档的解析
