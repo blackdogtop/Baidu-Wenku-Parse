@@ -10,7 +10,7 @@ import json
 
 def getAddressList(url):
     """
-    获取百度文库的json地址
+    获取百度文库url的json地址
     :param url:百度文库链接（仅doc格式的文件）
     :return addressList:json地址组成的list
     :return title:文库文件名
@@ -30,34 +30,39 @@ def getAddressList(url):
 def getJsonContent(urlList, title, savePath = '../data/'):
     """
     获取json文件内容
-    :param savePath:文件保存路径（默认为../data/）
-    :return 保存文件的绝对路径
+    :param savePath: 文件保存路径（默认为../data/）
     """
     content, result = '', ''
     pageNum, i = len(urlList), 1
     print('共计{}页'.format(pageNum))
-    for address in urlList:
+    for i, address in enumerate(urlList):
         print("正在获取第{}页".format(i))
-        i += 1
         content = requests.get(address).content.decode()
-        content = re.match(r'.*?\((.*)\)$', content).group(1)
+        try:
+            content = re.match(r'.*?\((.*)\)$', content).group(1)
+        except Exception:
+            print('无法解析，尝试直接复制？')
+            return
         allBodyInfo = json.loads(content)["body"]
-        for bodyInfo in allBodyInfo:
+        for j, bodyInfo in enumerate(allBodyInfo):
             result = result + bodyInfo['c'].strip()
+            # 根据y坐标值判断是否换行
+            if float(bodyInfo['p']['y']) != float(allBodyInfo[j-1]['p']['y']): result = result + '\n'
 
     if not os.path.exists(savePath):
-        os.mkdir(savePath)
+        os.makedirs(savePath)
     fileName = title + '.txt'
     with open(savePath + fileName, 'w') as f:
         f.write(result)
-    return os.path.abspath(savePath) + '/' +fileName
+
+    filePath = os.path.abspath(savePath) + '/' +fileName
+    print('获取成功，保存路径为{}'.format(filePath))
 
 
 def main():
     baiduURL = input('请输入百度文库链接：')
     addressList, title = getAddressList(baiduURL)
-    filePath = getJsonContent(addressList, title)
-    print('获取成功，保存路径为{}'.format(filePath))
+    getJsonContent(addressList, title)
 
 
 if __name__ == '__main__':
