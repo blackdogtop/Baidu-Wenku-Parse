@@ -14,5 +14,5 @@ python3 docParser.py
 4. 解析的文件会以txt的格式将会生成于 *../data* 中
 
 ## 效果演示
-![run-demo](https://raw.githubusercontent.com/blackdogtop/image-host/master/Baidu-Wenku-Parse/run-demo.png)
+![run-demo](https://raw.githubusercontent.com/blackdogtop/image-host/master/Baidu-Wenku-Parse/run-demo.png) <br/>
 ![txt-demo](https://raw.githubusercontent.com/blackdogtop/image-host/master/Baidu-Wenku-Parse/txt-demo.png)
