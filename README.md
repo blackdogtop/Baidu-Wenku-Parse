@@ -1,5 +1,5 @@
 # Baidu-Wenku-Parse
-一个简单的baidu wenku解析，可讲文档以txt的格式保存至本地（目前仅支持doc格式的文档解析）
+一个简单的baidu wenku解析，可将文档以txt的格式保存至本地（目前仅支持doc格式的文档解析）
 
 ## 如何使用
 1. 安装 *requirements.txt*
